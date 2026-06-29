@@ -33,24 +33,25 @@ backend-todo-api/
 ## 📦 Installation & Setup (Cara Instalasi)
 
 ### 1. **Clone the repository /_Klon repositori_:**
-   ```bash
+```text
    git clone [https://github.com/risazhrn/backend-todo-api.git](https://github.com/risazhrn/backend-todo-api.git)
    cd backend-todo-api
-   ```
+```
 
 ### 2. **Install dependencies /_Instal dependensi_:**
-    ```bash
+   ```text
     npm install
-    ```
+   ```
 ### 3. Database Setup / _Persiapan Database_:
 Make sure you have MongoDB installed and running locally on port 27017. You can use MongoDB Compass to monitor your database.
 _(Pastikan MongoDB sudah berjalan di lokal komputer pada port 27017. Kamu bisa menggunakan MongoDB Compass untuk memantau data)._
 
 ### 4. Run the development server / _Jalankan server pengembangan_:
-    ```bash
+   ```text
     npm run dev
-    ```
-    The server will start at http://localhost:3000 and automatically reload when you save changes.
+   ```
+   
+   The server will start at http://localhost:3000 and automatically reload when you save changes.
 
 ## 📖 API Documentation _(Dokumentasi API)_
 
@@ -63,13 +64,13 @@ Once the server is running, you can access the interactive Swagger UI documentat
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `GET` | `/api/todos` | Get all todo items (Mengambil semua daftar tugas) |
-| `POST` | `/api/todos` | Create a new todo item (Membuat tugas baru) |
-| `PUT` | `/api/todos/:id` | Update a todo item (Mengubah tugas berdasarkan ID) |
-| `DELETE` | `/api/todos/:id` | Delete a todo item (Menghapus tugas berdasarkan ID) |
+| `GET` | `/api/todos` | Get all todo items _(Mengambil semua daftar tugas)_ |
+| `POST` | `/api/todos` | Create a new todo item _(Membuat tugas baru)_ |
+| `PUT` | `/api/todos/:id` | Update a todo item _(Mengubah tugas berdasarkan ID)_ |
+| `DELETE` | `/api/todos/:id` | Delete a todo item _(Menghapus tugas berdasarkan ID) _|
 
-## 🧠 How It Works: Code Architecture (Penjelasan Arsitektur Kode)
-
+## 🧠 How It Works: Code Architecture _(Penjelasan Arsitektur Kode)
+_
 This section breaks down the reasoning behind the core components. *(Bagian ini membedah alasan di balik komponen inti).*
 
 ### 1. Database Modeling _(Pemodelan Database)_
@@ -77,7 +78,7 @@ This section breaks down the reasoning behind the core components. *(Bagian ini 
 
 We use a TypeScript Interface for compile-time checking, and a Mongoose Schema for runtime validation. *(Kita menggunakan Interface TypeScript untuk pengecekan saat coding, dan Skema Mongoose untuk validasi saat aplikasi berjalan).*
 
-```typescript
+```text
 const TodoSchema = new Schema<ITodo>({
   title: { type: String, required: [true, 'Title is required!'], trim: true },
   description: { type: String, default: '' },
@@ -92,7 +93,7 @@ Why? MongoDB is schemaless by default. Using Mongoose required and default prope
 **File:** `src/controllers/todo.controller.ts`
 
 Fastify allows us to attach JSON schemas directly to our route handlers.
-```typescript
+```text
 export const createTodoSchema = {
   schema: {
     description: 'Create a new Todo',
