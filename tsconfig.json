@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",                          /* Tentukan versi output JavaScript modern */
+    "module": "NodeNext",                        /* Resolusi modul modern yang cocok untuk Node.js terbaru */
+    "moduleResolution": "NodeNext",
+    "rootDir": "./src",                          /* Lokasi semua file source code TypeScript-mu */
+    "outDir": "./dist",                          /* Lokasi folder output saat di-build nanti */
+    "esModuleInterop": true,                     /* Memastikan kompatibilitas import CommonJS dan ES Modules */
+    "forceConsistentCasingInFileNames": true,    /* Memastikan nama file sensitif terhadap huruf besar/kecil */
+    "strict": true,                              /* Menyalakan pengecekan tipe data yang ketat (Sangat disarankan) */
+    "skipLibCheck": true                         /* Mempercepat proses compile dengan melewati pengecekan file .d.ts pihak ketiga */
+  },
+  "include": ["src/**/*"]                        /* Beritahu compiler untuk hanya memproses file di dalam folder src */
+}
