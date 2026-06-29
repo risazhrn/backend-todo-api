@@ -15,5 +15,5 @@ A modern, high-performance Todo List API built using Node.js, Fastify, TypeScrip
 
 1. **Clone the repository / Klon repositori:**
    ```bash
-   git clone <your-repository-url>
-   cd todo-api-modern
+   git clone https://github.com/risazhrn/backend-todo-api.git
+   cd backend-todo-api
