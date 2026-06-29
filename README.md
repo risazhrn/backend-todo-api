@@ -1,4 +1,4 @@
-# 📝 Modern Todo List API
+# 📝 Todo List API
 
 A modern, high-performance Todo List API built using Node.js, Fastify, TypeScript, and MongoDB.
 
