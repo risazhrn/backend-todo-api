@@ -7,7 +7,7 @@ A modern, high-performance Todo List API built using Node.js, Fastify, TypeScrip
 
 ---
 
-## 🚀 Tech Stack & Why I Chose Them (Teknologi & Alasannya)
+## 🚀 Tech Stack & Why I Chose Them _(Teknologi & Alasannya)_
 
 - **Runtime: Node.js**
 - **Language: TypeScript** — Enforces strict type-safety, catching errors during development rather than at runtime. *(Menerapkan keamanan tipe data yang ketat, menangkap eror saat penulisan kode).*
@@ -17,7 +17,7 @@ A modern, high-performance Todo List API built using Node.js, Fastify, TypeScrip
 
 ---
 
-## 📁 Folder Structure (Struktur Proyek)
+## 📁 Folder Structure _(Struktur Proyek)_
 
 ```text
 backend-todo-api/
@@ -28,3 +28,95 @@ backend-todo-api/
 │   └── app.ts          # Main entry point & server initialization
 ├── package.json        # Project manifest & scripts
 └── tsconfig.json       # TypeScript compiler configuration
+```
+
+## 📦 Installation & Setup (Cara Instalasi)
+
+### 1. **Clone the repository /_Klon repositori_:**
+   ```bash
+   git clone [https://github.com/risazhrn/backend-todo-api.git](https://github.com/risazhrn/backend-todo-api.git)
+   cd backend-todo-api
+   ```
+
+### 2. **Install dependencies /_Instal dependensi_:**
+    ```bash
+    npm install
+    ```
+### 3. Database Setup / _Persiapan Database_:
+Make sure you have MongoDB installed and running locally on port 27017. You can use MongoDB Compass to monitor your database.
+_(Pastikan MongoDB sudah berjalan di lokal komputer pada port 27017. Kamu bisa menggunakan MongoDB Compass untuk memantau data)._
+
+### 4. Run the development server / _Jalankan server pengembangan_:
+    ```bash
+    npm run dev
+    ```
+    The server will start at http://localhost:3000 and automatically reload when you save changes.
+
+## 📖 API Documentation _(Dokumentasi API)_
+
+Once the server is running, you can access the interactive Swagger UI documentation to test the endpoints directly from your browser:
+*(Setelah server berjalan, kamu dapat mengakses dokumentasi Swagger interaktif di:)*
+
+👉 **[http://localhost:3000/docs](http://localhost:3000/docs)**
+
+### Endpoint Summary:
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/todos` | Get all todo items (Mengambil semua daftar tugas) |
+| `POST` | `/api/todos` | Create a new todo item (Membuat tugas baru) |
+| `PUT` | `/api/todos/:id` | Update a todo item (Mengubah tugas berdasarkan ID) |
+| `DELETE` | `/api/todos/:id` | Delete a todo item (Menghapus tugas berdasarkan ID) |
+
+## 🧠 How It Works: Code Architecture (Penjelasan Arsitektur Kode)
+
+This section breaks down the reasoning behind the core components. *(Bagian ini membedah alasan di balik komponen inti).*
+
+### 1. Database Modeling _(Pemodelan Database)_
+**File:** `src/models/todo.model.ts`
+
+We use a TypeScript Interface for compile-time checking, and a Mongoose Schema for runtime validation. *(Kita menggunakan Interface TypeScript untuk pengecekan saat coding, dan Skema Mongoose untuk validasi saat aplikasi berjalan).*
+
+```typescript
+const TodoSchema = new Schema<ITodo>({
+  title: { type: String, required: [true, 'Title is required!'], trim: true },
+  description: { type: String, default: '' },
+  isCompleted: { type: Boolean, default: false },
+  createdAt: { type: Date, default: Date.now }
+});
+```
+
+Why? MongoDB is schemaless by default. Using Mongoose required and default properties prevents bad data (like a Todo without a title) from entering the database.
+
+### 2. Controllers & Schema Validation _(Logika & Validasi Skema)_
+**File:** `src/controllers/todo.controller.ts`
+
+Fastify allows us to attach JSON schemas directly to our route handlers.
+```typescript
+export const createTodoSchema = {
+  schema: {
+    description: 'Create a new Todo',
+    tags: ['Todo'],
+    body: {
+      type: 'object',
+      required: ['title'],
+      properties: {
+        title: { type: 'string', minLength: 1 },
+        description: { type: 'string' }
+      }
+    }
+  }
+};
+```
+Why? This is the core of Schema-Driven Development. This block automatically rejects invalid incoming HTTP requests and simultaneously draws the interactive Swagger UI documentation. _(Skema ini otomatis menolak request yang salah sekaligus menggambar tampilan Swagger)._
+
+### 3. Routing _(Pemetaan Jalur)_
+**File:** `src/routes/todo.routes.ts`
+
+Separating routes from the main application file keeps the codebase modular, readable, and easy to maintain as the project scales. _(Memisahkan rute membuat kode tetap rapi dan mudah dikelola seiring membesarnya proyek)._
+
+### 4. Server Initialization _(Inisialisasi Server)_
+**File:** `src/app.ts`
+
+Fastify's plugin system (fastify.register) ensures that everything is loaded in the correct asynchronous order. The server won't start accepting requests until the database connection and Swagger documentation generation are fully ready.
+
