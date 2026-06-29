@@ -67,7 +67,7 @@ Once the server is running, you can access the interactive Swagger UI documentat
 | `GET` | `/api/todos` | Get all todo items _(Mengambil semua daftar tugas)_ |
 | `POST` | `/api/todos` | Create a new todo item _(Membuat tugas baru)_ |
 | `PUT` | `/api/todos/:id` | Update a todo item _(Mengubah tugas berdasarkan ID)_ |
-| `DELETE` | `/api/todos/:id` | Delete a todo item _(Menghapus tugas berdasarkan ID) _|
+| `DELETE` | `/api/todos/:id` | Delete a todo item _(Menghapus tugas berdasarkan ID)_|
 
 ## 🧠 How It Works: Code Architecture _(Penjelasan Arsitektur Kode)
 _
